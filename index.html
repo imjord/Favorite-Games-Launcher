@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <title>Favorite Games</title>
+  </head>
+  <body>
+    <div>
+      <div class="games-container">
+        <ul class="game-list"></ul>
+      </div>
+
+      <button id="add-game">Add a game</button>
+    </div>
+    <script src="./renderer.js"></script>
+  </body>
+</html>
