@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
-const { ipcRenderer } = require("electron");
-const { exec } = require("child_process");
+const { ipcRenderer, shell } = require("electron");
+const { execFile, spawn } = require("child_process");
 const createDesktopShortcut = require("create-desktop-shortcuts");
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -51,7 +51,20 @@ const child = execFile('node', ['--version'], (error, stdout, stderr) => {
         listGame.innerText = file.toString().replace(".lnk", "");
         playBtn.addEventListener("click", () => {
           console.log(`click ${file}`);
-          exec(`./MyFavoriteGames/${file}`);
+          const parsed = shell.readShortcutLink(`./MyFavoriteGames/${file}`);
+          console.log(parsed);
+          // spawn(`./MyFavoriteGames/${file}`);
+          execFile(parsed.target, (error, stdout, stderr) => {
+            if (error) {
+              console.log(`error: ${error.message}`);
+              return;
+            }
+            if (stderr) {
+              console.log(`stderr: ${stderr}`);
+              return;
+            }
+            console.log("stdout: ", stdout);
+          });
         });
       });
     });
