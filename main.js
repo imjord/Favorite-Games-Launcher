@@ -1,5 +1,14 @@
 const { app, BrowserWindow, dialog, ipcMain } = require("electron");
 const path = require("path");
+const env = process.env.NODE_ENV || "development";
+
+// If development environment
+if (env === "development") {
+  require("electron-reload")(__dirname, {
+    electron: path.join(__dirname, "node_modules", ".bin", "electron"),
+    hardResetMethod: "exit",
+  });
+}
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -12,7 +21,7 @@ const createWindow = () => {
   });
 
   win.loadFile("index.html");
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
   win.setMenu(null);
 };
 

@@ -45,6 +45,7 @@ const child = execFile('node', ['--version'], (error, stdout, stderr) => {
       files.forEach((file) => {
         var playBtn = document.createElement("button");
         var listGame = document.createElement("li");
+        playBtn.classList.add("play-btn");
         playBtn.innerText = "Play Game";
         gameListUl.append(listGame);
         gameListUl.append(playBtn);
@@ -92,6 +93,7 @@ const child = execFile('node', ['--version'], (error, stdout, stderr) => {
           "./MyFavoriteGames/"
         )}`
       );
+      getAllGames();
     } else {
       console.log(
         'Could not create the icon or set its permissions (in Linux if "chmod" is set to true, or not set)'
