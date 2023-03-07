@@ -42,33 +42,70 @@ nav button:hover {
 .games-container {
   width: 100%;
 }
+.games-container div {
+}
 ul {
   margin: 20px;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   list-style: none;
 }
 
 li {
-  font-size: 20px;
+  font-size: 30px;
+  padding-bottom: 5px;
+  border-bottom: 5px solid black;
   display: flex;
-  justify-content: flex-start;
+  border-radius: 5px;
+  justify-content: space-between;
   align-items: center;
   margin-top: 15px;
   margin-bottom: 15px;
   color: white;
 }
 
+li span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .play-btn {
-  font-size: 20px;
-  padding: 10px;
+  font-size: 25px;
+  margin-left: 15px;
   background-color: rgb(91, 90, 90);
   color: white;
   border-radius: 5px;
+  padding: 5px;
   border: 0px solid gray;
-  margin-bottom: 15px;
+}
+
+.play-icon {
+  height: 25px;
 }
 
 .play-btn:hover {
-  background-color: black;
+  background-color: white;
   cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: gray;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

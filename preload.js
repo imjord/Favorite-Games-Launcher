@@ -45,11 +45,20 @@ const child = execFile('node', ['--version'], (error, stdout, stderr) => {
       files.forEach((file) => {
         var playBtn = document.createElement("button");
         var listGame = document.createElement("li");
+        var playIcon = document.createElement("img");
+        var spanEl = document.createElement("span");
+
+        playIcon.setAttribute("src", `./css/play.ico`);
+        playIcon.classList.add("play-icon");
         playBtn.classList.add("play-btn");
-        playBtn.innerText = "Play Game";
+
         gameListUl.append(listGame);
-        gameListUl.append(playBtn);
+        gameListUl.append(spanEl);
+
         listGame.innerText = file.toString().replace(".lnk", "");
+        listGame.append(spanEl);
+        spanEl.append(playBtn);
+        playBtn.append(playIcon);
         playBtn.addEventListener("click", () => {
           console.log(`click ${file}`);
           const parsed = shell.readShortcutLink(`./MyFavoriteGames/${file}`);

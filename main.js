@@ -12,8 +12,9 @@ if (env === "development") {
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 960,
+    icon: __dirname + "./css/game.ico",
     webPreferences: {
       preload: path.join(__dirname, "./preload.js"),
       nodeIntegration: true,
