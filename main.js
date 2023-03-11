@@ -22,6 +22,8 @@ const createWindow = () => {
     },
   });
 
+  win.webContents.openDevTools();
+
   win.loadFile("index.html");
   // win.webContents.openDevTools();
   win.setMenu(null);

@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // function to get the shortcut games from myfavorite games and list them in the app
   function getAllGames() {
-    fs.readdir("./MyFavoriteGames", (err, files) => {
+    fs.readdir("./resources/app/MyFavoriteGames", (err, files) => {
       console.log("going over games in folder...");
       // for (i = 0; i < files.length; i++) {
       //   let listGame = document.createElement("li");
@@ -47,21 +47,20 @@ const child = execFile('node', ['--version'], (error, stdout, stderr) => {
         var listGame = document.createElement("li");
         var playIcon = document.createElement("img");
         var spanEl = document.createElement("span");
-
         playIcon.setAttribute("src", `./css/play.ico`);
         playIcon.classList.add("play-icon");
         playBtn.classList.add("play-btn");
-
         gameListUl.append(listGame);
         gameListUl.append(spanEl);
-
         listGame.innerText = file.toString().replace(".lnk", "");
         listGame.append(spanEl);
         spanEl.append(playBtn);
         playBtn.append(playIcon);
         playBtn.addEventListener("click", () => {
           console.log(`click ${file}`);
-          const parsed = shell.readShortcutLink(`./MyFavoriteGames/${file}`);
+          const parsed = shell.readShortcutLink(
+            `./resources/app/MyFavoriteGames/${file}`
+          );
           console.log(parsed);
           // spawn(`./MyFavoriteGames/${file}`);
           execFile(parsed.target, (error, stdout, stderr) => {
