@@ -34,7 +34,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // function to get the shortcut games from myfavorite games and list them in the app
   function getAllGames() {
-    fs.readdir("./MyFavoriteGames", (err, files) => {
+    fs.readdir("./resources/app/MyFavoriteGames", (err, files) => {
       console.log("going over games in folder...");
       files.forEach((file) => {
         var playBtn = document.createElement("button");
@@ -52,7 +52,9 @@ window.addEventListener("DOMContentLoaded", () => {
         playBtn.append(playIcon);
         playBtn.addEventListener("click", () => {
           // console.log(`click ${file}`);
-          const parsed = shell.readShortcutLink(`./MyFavoriteGames/${file}`);
+          const parsed = shell.readShortcutLink(
+            `./resources/app/MyFavoriteGames/${file}`
+          );
           // console.log(parsed);
           execFile(parsed.target, (error, stdout, stderr) => {
             if (error) {
@@ -79,7 +81,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const shortcutsCreated = createDesktopShortcut({
       windows: {
         filePath: file,
-        outputPath: path.join(__dirname, "./MyFavoriteGames/"),
+        outputPath: path.join(__dirname, "./MyFavoriteGames"),
       },
     });
     if (shortcutsCreated) {
