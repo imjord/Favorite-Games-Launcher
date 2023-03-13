@@ -51,14 +51,14 @@ ipcMain.on("file-request", (event) => {
       .then((file) => {
         // Stating whether dialog operation was
         // cancelled or not.
-        console.log(file.canceled);
+        // console.log(file.canceled);
         if (!file.canceled) {
           const filepath = file.filePaths[0].toString();
           event.reply("file", filepath);
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   } else {
     // If the platform is 'darwin' (macOS)
@@ -78,7 +78,7 @@ ipcMain.on("file-request", (event) => {
         properties: ["openFile", "openDirectory"],
       })
       .then((file) => {
-        console.log(file.canceled);
+        // console.log(file.canceled);
         if (!file.canceled) {
           const filepath = file.filePaths[0].toString();
 

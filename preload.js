@@ -7,6 +7,7 @@ const createDesktopShortcut = require("create-desktop-shortcuts");
 window.addEventListener("DOMContentLoaded", () => {
   const addGameBtnEl = document.getElementById("add-game");
   let gameListUl = document.querySelector(".game-list");
+  var getGamesEl = document.querySelector("#get-games");
 
   // check if folder exists if it doesnt then create a new one
 
@@ -25,23 +26,16 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // function to update the list of games
+  getGamesEl.addEventListener("click", () => {
+    gameListUl.innerHTML = "";
+    getAllGames();
+  });
+
   // function to get the shortcut games from myfavorite games and list them in the app
   function getAllGames() {
-    fs.readdir("./resources/app/MyFavoriteGames", (err, files) => {
+    fs.readdir("./MyFavoriteGames", (err, files) => {
       console.log("going over games in folder...");
-      // for (i = 0; i < files.length; i++) {
-      //   let listGame = document.createElement("li");
-      //   gameListUl.append(listGame);
-      //   listGame.innerText = files[i];
-      // }
-      /* 
-const child = execFile('node', ['--version'], (error, stdout, stderr) => {
-  if (error) {
-    throw error;
-  } gameExePath
-  console.log(stdout);
-}); */
-      // idk i like foreachs
       files.forEach((file) => {
         var playBtn = document.createElement("button");
         var listGame = document.createElement("li");
@@ -57,22 +51,19 @@ const child = execFile('node', ['--version'], (error, stdout, stderr) => {
         spanEl.append(playBtn);
         playBtn.append(playIcon);
         playBtn.addEventListener("click", () => {
-          console.log(`click ${file}`);
-          const parsed = shell.readShortcutLink(
-            `./resources/app/MyFavoriteGames/${file}`
-          );
-          console.log(parsed);
-          // spawn(`./MyFavoriteGames/${file}`);
+          // console.log(`click ${file}`);
+          const parsed = shell.readShortcutLink(`./MyFavoriteGames/${file}`);
+          // console.log(parsed);
           execFile(parsed.target, (error, stdout, stderr) => {
             if (error) {
-              console.log(`error: ${error.message}`);
+              // console.log(`error: ${error.message}`);
               return;
             }
             if (stderr) {
-              console.log(`stderr: ${stderr}`);
+              // console.log(`stderr: ${stderr}`);
               return;
             }
-            console.log("stdout: ", stdout);
+            // console.log("stdout: ", stdout);
           });
         });
       });
@@ -83,11 +74,8 @@ const child = execFile('node', ['--version'], (error, stdout, stderr) => {
   addGameBtnEl.addEventListener("click", () => {
     ipcRenderer.send("file-request");
   });
-
   //upon receiving a file, process accordingly
   ipcRenderer.on("file", (event, file) => {
-    var gameExePath = file;
-
     const shortcutsCreated = createDesktopShortcut({
       windows: {
         filePath: file,
@@ -101,7 +89,6 @@ const child = execFile('node', ['--version'], (error, stdout, stderr) => {
           "./MyFavoriteGames/"
         )}`
       );
-      getAllGames();
     } else {
       console.log(
         'Could not create the icon or set its permissions (in Linux if "chmod" is set to true, or not set)'
