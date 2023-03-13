@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  /* font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; */
 }
 
 nav {
@@ -11,6 +11,7 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  font-family: "comic sans ms", sans-serif;
 }
 
 nav h3 {
@@ -38,6 +39,7 @@ nav button:hover {
   height: 100vh;
   display: flex;
   justify-content: center;
+  font-family: "Tahoma", sans-serif;
 }
 
 .games-container {
