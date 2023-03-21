@@ -23,7 +23,7 @@ const createWindow = () => {
   });
   win.loadFile("index.html");
   win.setIcon(__dirname + "./css/game.ico");
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
   win.setMenu(null);
 };
 
