@@ -11,13 +11,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // check if folder exists if it doesnt then create a new one
 
-  if (fs.existsSync("./MyFavoriteGames")) {
+  if (fs.existsSync("./resources/app/MyFavoriteGames")) {
     console.log("favorite games folder found...");
 
     getAllGames();
   } else {
     console.log("favorite games folder not found... creating folder");
-    fs.mkdir(path.join(__dirname, "./MyFavoriteGames"), (err) => {
+    fs.mkdir(path.join(__dirname, "./resources/app/MyFavoriteGames"), (err) => {
       if (err) {
         return console.error(err);
       }
@@ -32,6 +32,16 @@ window.addEventListener("DOMContentLoaded", () => {
     getAllGames();
   });
 
+  // function to remove the game from the myfavorite games folder
+  function removeGame(gameName) {
+    fs.unlink(`./resources/app/MyFavoriteGames/${gameName}.lnk`, (err) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log("File deleted successfully!");
+    });
+  }
+
   // function to get the shortcut games from myfavorite games and list them in the app
   function getAllGames() {
     fs.readdir("./resources/app/MyFavoriteGames", (err, files) => {
@@ -41,6 +51,12 @@ window.addEventListener("DOMContentLoaded", () => {
         var listGame = document.createElement("li");
         var playIcon = document.createElement("img");
         var spanEl = document.createElement("span");
+        var removeBtn = document.createElement("button");
+        var removeIcon = document.createElement("img");
+        removeIcon.setAttribute("src", `./css/remove.ico`);
+        removeIcon.classList.add("remove-icon");
+        removeBtn.classList.add("remove-btn");
+        removeBtn.append(removeIcon);
         playIcon.setAttribute("src", `./css/play.ico`);
         playIcon.classList.add("play-icon");
         playBtn.classList.add("play-btn");
@@ -50,11 +66,16 @@ window.addEventListener("DOMContentLoaded", () => {
         listGame.append(spanEl);
         spanEl.append(playBtn);
         playBtn.append(playIcon);
+        removeBtn.addEventListener("click", () => {
+          removeGame(file.toString().replace(".lnk", ""));
+          getAllGames();
+        });
         playBtn.addEventListener("click", () => {
           // console.log(`click ${file}`);
           const parsed = shell.readShortcutLink(
             `./resources/app/MyFavoriteGames/${file}`
           );
+
           // console.log(parsed);
           execFile(parsed.target, (error, stdout, stderr) => {
             if (error) {
