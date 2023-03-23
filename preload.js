@@ -125,7 +125,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const shortcutsCreated = createDesktopShortcut({
       windows: {
         filePath: file,
-        outputPath: path.join(__dirname, "./resources/app/MyFavoriteGames"),
+        outputPath: path.join(__dirname, "./MyFavoriteGames"),
       },
     });
     if (shortcutsCreated) {
