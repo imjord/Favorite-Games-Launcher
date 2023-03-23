@@ -1,23 +1,23 @@
+// imports
 const path = require("path");
 const fs = require("fs");
 const { ipcRenderer, shell } = require("electron");
-const { execFile, spawn } = require("child_process");
+const { execFile } = require("child_process");
 const createDesktopShortcut = require("create-desktop-shortcuts");
 
 window.addEventListener("DOMContentLoaded", () => {
+  // variables from the dommy boi
   const addGameBtnEl = document.getElementById("add-game");
   let gameListUl = document.querySelector(".game-list");
-  var getGamesEl = document.querySelector("#get-games");
 
   // check if folder exists if it doesnt then create a new one
-
-  if (fs.existsSync("./resources/app/MyFavoriteGames")) {
+  if (fs.existsSync("./MyFavoriteGames")) {
     console.log("favorite games folder found...");
 
     getAllGames();
   } else {
     console.log("favorite games folder not found... creating folder");
-    fs.mkdir(path.join(__dirname, "./resources/app/MyFavoriteGames"), (err) => {
+    fs.mkdir(path.join(__dirname, "./MyFavoriteGames"), (err) => {
       if (err) {
         return console.error(err);
       }
@@ -26,67 +26,71 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // function to update the list of games
-  getGamesEl.addEventListener("click", () => {
-    gameListUl.innerHTML = "";
-    getAllGames();
-  });
+  // function to update the list of games ****depricated for now idk ;)
+  // getGamesEl.addEventListener("click", () => {
+  //   gameListUl.innerHTML = "";
+  //   getAllGames();
+  // });
 
   // function to remove the game from the myfavorite games folder
   function removeGame(gameName) {
-    fs.unlink(`./resources/app/MyFavoriteGames/${gameName}.lnk`, (err) => {
-      if (err) {
-        console.log(err);
-      }
-      console.log("File deleted successfully!");
-    });
+    try {
+      fs.unlinkSync(`./MyFavoriteGames/${gameName}.lnk`);
+      console.log(
+        `successfully removed ${gameName} from favorite games folder`
+      );
+      gameListUl.innerHTML = "";
+      getAllGames();
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   // function to get the shortcut games from myfavorite games and list them in the app
   function getAllGames() {
-    fs.readdir("./resources/app/MyFavoriteGames", (err, files) => {
+    fs.readdir("./MyFavoriteGames", (err, files) => {
       console.log("going over games in folder...");
       files.forEach((file) => {
+        // variables from the dommy boi
         var playBtn = document.createElement("button");
         var listGame = document.createElement("li");
         var playIcon = document.createElement("img");
         var spanEl = document.createElement("span");
         var removeBtn = document.createElement("button");
         var removeIcon = document.createElement("img");
+        // add classes to elements and append them
+        // remove button
         removeIcon.setAttribute("src", `./css/remove.ico`);
         removeIcon.classList.add("remove-icon");
         removeBtn.classList.add("remove-btn");
-        removeBtn.append(removeIcon);
+        // play button
         playIcon.setAttribute("src", `./css/play.ico`);
         playIcon.classList.add("play-icon");
         playBtn.classList.add("play-btn");
+        // game list n appending
         gameListUl.append(listGame);
         gameListUl.append(spanEl);
+        // replace .lnk from the file name so it doesnt show up in the list
         listGame.innerText = file.toString().replace(".lnk", "");
         listGame.append(spanEl);
         spanEl.append(playBtn);
+        spanEl.append(removeBtn);
         playBtn.append(playIcon);
+        removeBtn.append(removeIcon);
+        // add event listeners to buttons
         removeBtn.addEventListener("click", () => {
           removeGame(file.toString().replace(".lnk", ""));
-          getAllGames();
         });
         playBtn.addEventListener("click", () => {
-          // console.log(`click ${file}`);
-          const parsed = shell.readShortcutLink(
-            `./resources/app/MyFavoriteGames/${file}`
-          );
+          const parsed = shell.readShortcutLink(`./MyFavoriteGames/${file}`);
 
-          // console.log(parsed);
           execFile(parsed.target, (error, stdout, stderr) => {
             if (error) {
-              // console.log(`error: ${error.message}`);
               return;
             }
             if (stderr) {
-              // console.log(`stderr: ${stderr}`);
               return;
             }
-            // console.log("stdout: ", stdout);
           });
         });
       });
@@ -97,7 +101,7 @@ window.addEventListener("DOMContentLoaded", () => {
   addGameBtnEl.addEventListener("click", () => {
     ipcRenderer.send("file-request");
   });
-  //upon receiving a file, process accordingly
+  //upon receiving a file from the icpon main process accordingly
   ipcRenderer.on("file", (event, file) => {
     const shortcutsCreated = createDesktopShortcut({
       windows: {
@@ -112,6 +116,8 @@ window.addEventListener("DOMContentLoaded", () => {
           "./MyFavoriteGames/"
         )}`
       );
+      gameListUl.innerHTML = "";
+      getAllGames();
     } else {
       console.log(
         'Could not create the icon or set its permissions (in Linux if "chmod" is set to true, or not set)'
