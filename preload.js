@@ -11,12 +11,12 @@ window.addEventListener("DOMContentLoaded", () => {
   let gameListUl = document.querySelector(".game-list");
 
   // check if folder exists if it doesnt then create a new one
-  if (fs.existsSync("./resources/app/MyFavoriteGames")) {
+  if (fs.existsSync("./MyFavoriteGames")) {
     // console.log("favorite games folder found...");
     getAllGames();
   } else {
     // console.log("favorite games folder not found... creating folder");
-    fs.mkdir(path.join(__dirname, "./resources/app/MyFavoriteGames"), (err) => {
+    fs.mkdir(path.join(__dirname, "./MyFavoriteGames"), (err) => {
       if (err) {
         return console.error(err);
       }
