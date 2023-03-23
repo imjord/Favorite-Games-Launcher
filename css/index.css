@@ -11,20 +11,24 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-family: "comic sans ms", sans-serif;
+  font-family: "Tahoma", sans-serif;
 }
 
 nav h3 {
   color: white;
   font-size: 30px;
+  text-shadow: 10px 10px 10px black;
 }
 
 nav button {
   font-size: 20px;
   padding: 10px;
+  text-shadow: 4px 4px 4px black;
   background-color: rgb(0, 140, 255);
+  font-weight: 700;
   color: white;
   border-radius: 5px;
+  box-shadow: 10px 10px 10px black;
   border: 0px solid gray;
 }
 
@@ -32,6 +36,33 @@ nav button:hover {
   background-color: white;
   color: black;
   cursor: pointer;
+  text-shadow: 1px 1px 2px black;
+}
+
+/* message container in the middle of app */
+.message {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 30px;
+  background-color: rgb(0, 140, 255);
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 10px 10px 10px black;
+  width: 40%;
+  height: 10%;
+  font-family: "Tahoma", sans-serif;
+}
+
+#message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .games-wrapper {
@@ -59,6 +90,7 @@ li {
   padding-bottom: 5px;
   border-bottom: 5px solid black;
   display: flex;
+  text-shadow: 10px 10px 10px black;
   border-radius: 5px;
   justify-content: space-between;
   align-items: center;
@@ -76,15 +108,17 @@ li span {
 .remove-btn {
   font-size: 25px;
   margin-left: 15px;
+  background-color: rgb(0, 140, 255);
   color: white;
   border-radius: 5px;
   padding: 5px;
   border: 0px solid gray;
+  box-shadow: 10px 10px 10px black;
 }
 
 .remove-icon {
   height: 25px;
-  padding: 10px;
+  margin: 3px 5px;
 }
 
 .remove-btn:hover {
@@ -100,10 +134,12 @@ li span {
   border-radius: 5px;
   padding: 5px;
   border: 0px solid gray;
+  box-shadow: 10px 10px 10px black;
 }
 
 .play-icon {
   height: 25px;
+  margin: 3px 5px;
 }
 
 .play-btn:hover {

@@ -13,7 +13,6 @@ window.addEventListener("DOMContentLoaded", () => {
   // check if folder exists if it doesnt then create a new one
   if (fs.existsSync("./MyFavoriteGames")) {
     console.log("favorite games folder found...");
-
     getAllGames();
   } else {
     console.log("favorite games folder not found... creating folder");
@@ -26,11 +25,35 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // function to update the list of games ****depricated for now idk ;)
-  // getGamesEl.addEventListener("click", () => {
-  //   gameListUl.innerHTML = "";
-  //   getAllGames();
-  // });
+  function playGame(game) {
+    try {
+      const parsed = shell.readShortcutLink(`./MyFavoriteGames/${game}`);
+      execFile(parsed.target, (error, stdout, stderr) => {
+        if (error) {
+          return;
+        }
+        if (stderr) {
+          return;
+        }
+      });
+    } catch (error) {
+      errorMessage(
+        "Could not open the game executable, make sure it is a valid executable or check permissions"
+      );
+    }
+  }
+
+  // error function with a message that will dissapear after 5 seconds
+  function errorMessage(message) {
+    let errorMessageEl = document.querySelector(".message");
+    let errorMessageText = document.querySelector("#message");
+    errorMessageText.innerText = message;
+    errorMessageEl.style.display = "block";
+    setTimeout(() => {
+      errorMessageEl.style.display = "none";
+      errorMessageText.innerText = "";
+    }, 5000);
+  }
 
   // function to remove the game from the myfavorite games folder
   function removeGame(gameName) {
@@ -43,6 +66,9 @@ window.addEventListener("DOMContentLoaded", () => {
       getAllGames();
     } catch (err) {
       console.error(err);
+      errorMessage(
+        "Could not remove the game from the list, please open an issue on github"
+      );
     }
   }
 
@@ -82,16 +108,7 @@ window.addEventListener("DOMContentLoaded", () => {
           removeGame(file.toString().replace(".lnk", ""));
         });
         playBtn.addEventListener("click", () => {
-          const parsed = shell.readShortcutLink(`./MyFavoriteGames/${file}`);
-
-          execFile(parsed.target, (error, stdout, stderr) => {
-            if (error) {
-              return;
-            }
-            if (stderr) {
-              return;
-            }
-          });
+          playGame(file);
         });
       });
     });
@@ -119,8 +136,8 @@ window.addEventListener("DOMContentLoaded", () => {
       gameListUl.innerHTML = "";
       getAllGames();
     } else {
-      console.log(
-        'Could not create the icon or set its permissions (in Linux if "chmod" is set to true, or not set)'
+      errorMessage(
+        '\'Could not create the icon or set its permissions (in Linux if "chmod" is set to true, or not set)'
       );
     }
   });
