@@ -4,7 +4,6 @@
 ![GitHub forks](https://img.shields.io/github/forks/imjord/Favorite-Games-Library?style=for-the-badge)
 ![GitHub Repo stars](https://img.shields.io/github/stars/imjord/Favorite-Games-Library?style=for-the-badge)
 
-
   <div align="center">
   <h3 align="center">Favorite Games Launcher</h3>
 <p align="center">
@@ -95,7 +94,7 @@
       ```
   3. Run the start commands in both client and server folders (commands are in the package.json files).
       ```sh
-      npm start / npm run dev
+      npm run make n after that a out folder will be created with the app inside
       ```
   4. Enjoy! made with <3 by imjord
 
@@ -112,19 +111,16 @@
   
   ## Demo
 
-
 https://user-images.githubusercontent.com/82243498/227377218-03e43564-b918-4494-8318-85c0660f9490.mp4
 
-
-  
   <!-- ROADMAP -->
-  ## Roadmap
-  
-  - [] Figure out how to make it so you dont need steam/epic/riot/ea launcher to be running for you to open and play the game but i think that might not be legal so this is the best i could do.
-  
-  
-  See the [open issues](https://github.com/imjord/Favorite-Games-Library/issues) for a full list of future proposed features (and known issues).
-  
+
+## Roadmap
+
+- [] Figure out how to make it so you dont need steam/epic/riot/ea launcher to be running for you to open and play the game but i think that might not be legal so this is the best i could do.
+
+See the [open issues](https://github.com/imjord/Favorite-Games-Library/issues) for a full list of future proposed features (and known issues).
+
   <p align="right">(<a href="#readme-top">back to top</a>)</p>
   
   
