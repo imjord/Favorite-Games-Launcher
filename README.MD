@@ -3,7 +3,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/imjord/Favorite-Games-Library?color=%23454B1B&label=CONTRIBUTORS%20%3C3&style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/imjord/Favorite-Games-Library?style=for-the-badge)
 ![GitHub Repo stars](https://img.shields.io/github/stars/imjord/Favorite-Games-Library?style=for-the-badge)
-![GitHub](https://img.shields.io/github/license/imjord/Favorite-Games-Library?style=for-the-badge)
+
 
   <div align="center">
   <h3 align="center">Favorite Games Launcher</h3>
