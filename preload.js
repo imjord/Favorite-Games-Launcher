@@ -12,15 +12,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // check if folder exists if it doesnt then create a new one
   if (fs.existsSync("./MyFavoriteGames")) {
-    console.log("favorite games folder found...");
+    // console.log("favorite games folder found...");
     getAllGames();
   } else {
-    console.log("favorite games folder not found... creating folder");
+    // console.log("favorite games folder not found... creating folder");
     fs.mkdir(path.join(__dirname, "./MyFavoriteGames"), (err) => {
       if (err) {
         return console.error(err);
       }
-      console.log("Favorite Games Folder created successfully!");
+      // console.log("Favorite Games Folder created successfully!");
       getAllGames();
     });
   }
@@ -59,9 +59,9 @@ window.addEventListener("DOMContentLoaded", () => {
   function removeGame(gameName) {
     try {
       fs.unlinkSync(`./MyFavoriteGames/${gameName}.lnk`);
-      console.log(
-        `successfully removed ${gameName} from favorite games folder`
-      );
+      // console.log(
+      //   `successfully removed ${gameName} from favorite games folder`
+      // );
       gameListUl.innerHTML = "";
       getAllGames();
     } catch (err) {
@@ -75,7 +75,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // function to get the shortcut games from myfavorite games and list them in the app
   function getAllGames() {
     fs.readdir("./MyFavoriteGames", (err, files) => {
-      console.log("going over games in folder...");
+      // console.log("going over games in folder...");
       files.forEach((file) => {
         // variables from the dommy boi
         var playBtn = document.createElement("button");
@@ -127,12 +127,12 @@ window.addEventListener("DOMContentLoaded", () => {
       },
     });
     if (shortcutsCreated) {
-      console.log(
-        `Game executable placed inside ${path.join(
-          __dirname,
-          "./MyFavoriteGames/"
-        )}`
-      );
+      // console.log(
+      //   `Game executable placed inside ${path.join(
+      //     __dirname,
+      //     "./MyFavoriteGames/"
+      //   )}`
+      // );
       gameListUl.innerHTML = "";
       getAllGames();
     } else {
