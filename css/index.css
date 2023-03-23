@@ -9,7 +9,7 @@ nav {
   background-color: #171a21;
   padding: 25px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   font-family: "Tahoma", sans-serif;
 }
@@ -20,9 +20,17 @@ nav h3 {
   text-shadow: 10px 10px 10px black;
 }
 
+nav div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 25%;
+}
+
 nav button {
   font-size: 20px;
   padding: 10px;
+  width: 200px;
   text-shadow: 4px 4px 4px black;
   background-color: rgb(0, 140, 255);
   font-weight: 700;
@@ -37,6 +45,27 @@ nav button:hover {
   color: black;
   cursor: pointer;
   text-shadow: 1px 1px 2px black;
+}
+
+.mode {
+  padding: 5px;
+  background-color: rgb(0, 140, 255);
+  border-radius: 50%;
+  box-shadow: 5px 5px 5x black;
+  border: 0px solid gray;
+  width: 50px;
+  padding: 10px;
+}
+
+#mode-icon {
+  height: 30px;
+  margin: 0px 20px;
+}
+
+.mode:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
 }
 
 /* message container in the middle of app */
