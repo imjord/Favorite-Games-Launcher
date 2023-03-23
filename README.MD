@@ -111,7 +111,11 @@
   <p align="right">(<a href="#readme-top">back to top</a>)</p>
   
   ## Demo
-  ![demo video](./imjord-game-launcher-demo.mp4)
+
+
+https://user-images.githubusercontent.com/82243498/227377218-03e43564-b918-4494-8318-85c0660f9490.mp4
+
+
   
   <!-- ROADMAP -->
   ## Roadmap
