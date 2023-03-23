@@ -11,12 +11,12 @@ window.addEventListener("DOMContentLoaded", () => {
   let gameListUl = document.querySelector(".game-list");
 
   // check if folder exists if it doesnt then create a new one
-  if (fs.existsSync("./MyFavoriteGames")) {
+  if (fs.existsSync("./resources/app/MyFavoriteGames")) {
     // console.log("favorite games folder found...");
     getAllGames();
   } else {
     // console.log("favorite games folder not found... creating folder");
-    fs.mkdir(path.join(__dirname, "./MyFavoriteGames"), (err) => {
+    fs.mkdir(path.join(__dirname, "./resources/app/MyFavoriteGames"), (err) => {
       if (err) {
         return console.error(err);
       }
@@ -27,7 +27,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function playGame(game) {
     try {
-      const parsed = shell.readShortcutLink(`./MyFavoriteGames/${game}`);
+      const parsed = shell.readShortcutLink(
+        `./resources/app/MyFavoriteGames/${game}`
+      );
       execFile(parsed.target, (error, stdout, stderr) => {
         if (error) {
           return;
@@ -58,7 +60,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // function to remove the game from the myfavorite games folder
   function removeGame(gameName) {
     try {
-      fs.unlinkSync(`./MyFavoriteGames/${gameName}.lnk`);
+      fs.unlinkSync(`./resources/app/MyFavoriteGames/${gameName}.lnk`);
       // console.log(
       //   `successfully removed ${gameName} from favorite games folder`
       // );
@@ -74,7 +76,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // function to get the shortcut games from myfavorite games and list them in the app
   function getAllGames() {
-    fs.readdir("./MyFavoriteGames", (err, files) => {
+    fs.readdir("./resources/app/MyFavoriteGames", (err, files) => {
       // console.log("going over games in folder...");
       files.forEach((file) => {
         // variables from the dommy boi
@@ -123,14 +125,14 @@ window.addEventListener("DOMContentLoaded", () => {
     const shortcutsCreated = createDesktopShortcut({
       windows: {
         filePath: file,
-        outputPath: path.join(__dirname, "./MyFavoriteGames"),
+        outputPath: path.join(__dirname, "./resources/app/MyFavoriteGames"),
       },
     });
     if (shortcutsCreated) {
       // console.log(
       //   `Game executable placed inside ${path.join(
       //     __dirname,
-      //     "./MyFavoriteGames/"
+      //     "./resources/app/MyFavoriteGames/"
       //   )}`
       // );
       gameListUl.innerHTML = "";
