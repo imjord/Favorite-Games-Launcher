@@ -111,7 +111,7 @@
   <p align="right">(<a href="#readme-top">back to top</a>)</p>
   
   ## Demo
-  [![demo video](./imjord-game-launcher-demo.mp4)]
+  ![demo video](./imjord-game-launcher-demo.mp4)
   
   <!-- ROADMAP -->
   ## Roadmap
