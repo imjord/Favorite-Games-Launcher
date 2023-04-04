@@ -11,12 +11,12 @@ window.addEventListener("DOMContentLoaded", () => {
   let gameListUl = document.querySelector(".game-list");
 
   // check if folder exists if it doesnt then create a new one
-  if (fs.existsSync("./MyFavoriteGames")) {
-    // console.log("favorite games folder found...");
+  if (fs.existsSync("./resources/app/MyFavoriteGames/")) {
+    console.log("favorite games folder found...");
     getAllGames();
   } else {
-    // console.log("favorite games folder not found... creating folder");
-    fs.mkdir(path.join(__dirname, "./MyFavoriteGames"), (err) => {
+    console.log("favorite games folder not found... creating folder");
+    fs.mkdir(path.join(__dirname, "./resources/app/MyFavoriteGames"), (err) => {
       if (err) {
         return console.error(err);
       }
@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
   function playGame(game) {
     try {
       const parsed = shell.readShortcutLink(
-        `./resources/app/MyFavoriteGames/${game}`
+        `./resources/app/MyFavoriteGames//${game}`
       );
       execFile(parsed.target, (error, stdout, stderr) => {
         if (error) {
@@ -76,7 +76,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // function to get the shortcut games from myfavorite games and list them in the app
   function getAllGames() {
-    fs.readdir("./resources/app/MyFavoriteGames", (err, files) => {
+    fs.readdir("./resources/app/MyFavoriteGames/", (err, files) => {
       // console.log("going over games in folder...");
       files.forEach((file) => {
         // variables from the dommy boi
@@ -132,7 +132,7 @@ window.addEventListener("DOMContentLoaded", () => {
       // console.log(
       //   `Game executable placed inside ${path.join(
       //     __dirname,
-      //     "./resources/app/MyFavoriteGames/"
+      //     "./MyFavoriteGames/"
       //   )}`
       // );
       gameListUl.innerHTML = "";
