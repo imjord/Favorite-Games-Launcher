@@ -114,9 +114,34 @@ ul {
   list-style: none;
 }
 
+/* on hover for games-container have transparent hover effect */
+
+.game-list {
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.game-list li:hover {
+  background-color: rgba(180, 165, 165, 0.2);
+  cursor: pointer;
+  animation: pulse 0.3s ease-in;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.004);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 li {
   font-size: 30px;
-  padding-bottom: 5px;
+  padding: 8px;
   border-bottom: 5px solid black;
   display: flex;
   text-shadow: 10px 10px 10px black;
