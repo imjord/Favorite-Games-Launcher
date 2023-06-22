@@ -11,25 +11,24 @@ window.addEventListener("DOMContentLoaded", () => {
   let gameListUl = document.querySelector(".game-list");
 
   // check if folder exists if it doesnt then create a new one
-  if (fs.existsSync("./resources/app/MyFavoriteGames/")) {
-    console.log("favorite games folder found...");
+  let dirPath = path.resolve(__dirname, "./MyFavoriteGames");
+  console.log("Directory path:", dirPath);
+
+  if (!fs.existsSync(dirPath)) {
+    console.log("favorite games folder not found... creating folder");
+    fs.mkdirSync(dirPath, { recursive: true });
     getAllGames();
   } else {
-    console.log("favorite games folder not found... creating folder");
-    fs.mkdir(path.join(__dirname, "./resources/app/MyFavoriteGames"), (err) => {
-      if (err) {
-        return console.error(err);
-      }
-      // console.log("Favorite Games Folder created successfully!");
-      getAllGames();
-    });
+    console.log("favorite games folder found...");
+    getAllGames();
   }
 
   function playGame(game) {
     try {
       const parsed = shell.readShortcutLink(
-        `./resources/app/MyFavoriteGames//${game}`
+        `./resources/app/MyFavoriteGames/${game}`
       );
+
       execFile(parsed.target, (error, stdout, stderr) => {
         if (error) {
           return;
@@ -125,9 +124,10 @@ window.addEventListener("DOMContentLoaded", () => {
     const shortcutsCreated = createDesktopShortcut({
       windows: {
         filePath: file,
-        outputPath: path.join(__dirname, "./MyFavoriteGames"),
+        outputPath: path.resolve(__dirname, "./MyFavoriteGames"),
       },
     });
+
     if (shortcutsCreated) {
       // console.log(
       //   `Game executable placed inside ${path.join(
