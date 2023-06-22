@@ -88,15 +88,17 @@
       ```sh
       git clone https://github.com/imjord/Favorite-Games-Library.git
       ```
-  2. Install NPM packages in both client and server folders
+  2. Install NPM packages in root folder
       ```sh
       npm install
       ```
-  3. Run the start commands in both client and server folders (commands are in the package.json files).
+  3. Run the commands (commands are in the package.json files).
       ```sh
       npm run make n after that a out folder will be created with the app inside
       ```
-  4. Enjoy! made with <3 by imjord
+  4. Navigate to the out folder and the myfavorite games folder and the app should be in there.
+  5. Enjoy! made with <3 by imjord
+
 
   <p align="right">(<a href="#readme-top">back to top</a>)</p>
   
